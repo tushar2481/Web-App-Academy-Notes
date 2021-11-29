@@ -1,6 +1,6 @@
 # SQL Injection (severe)
 
-![SQL%20Injection%20(severe)%204d13e96dfefb421d81de21990d04ad99/sql-injection.svg](SQL%20Injection%20(severe)%204d13e96dfefb421d81de21990d04ad99/sql-injection.svg)
+
 
 ## What is SQL injection?
 
